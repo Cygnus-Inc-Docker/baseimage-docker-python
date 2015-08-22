@@ -1,7 +1,9 @@
 FROM debian
 
 ADD ./version /version
-RUN apt-get update && \
+RUN \
+apt-get update \
+&& \
 apt-get install -y --no-install-recommends \
 wget \
 curl \
@@ -16,7 +18,11 @@ libffi-dev \
 llvm \
 zlib1g-dev \
 libncurses5-dev \
-make
+make \
+&& \
+apt-get clean \
+&& \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN git clone git://github.com/yyuu/pyenv.git && \
 cd pyenv/plugins/python-build && \
